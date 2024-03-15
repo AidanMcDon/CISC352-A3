@@ -42,7 +42,6 @@ def normalize(self):
     """
     "*** YOUR CODE HERE ***"
     total = self.total()
-    print("Total: " + str(total))
     if(total == 0):
         return
     for key in self.keys():##for each key divide its value by total to normalize dictionary
@@ -74,7 +73,6 @@ def sample(self):
     0.0
     """
     "*** YOUR CODE HERE ***"
-    raiseNotDefined()
     random_float = random.random()
     count = 0
     normal_set = self.copy().normalize()
@@ -126,3 +124,4 @@ def elapseTime(self, gameState):
     """
     "*** YOUR CODE HERE ***"
     raiseNotDefined()
+

@@ -313,3 +313,13 @@ if __name__ == '__main__':
     new_dict.normalize()
     
     print("\nAfter Normalization: " + new_dict.values().__str__())
+
+    N = 100000.0
+    samples = [new_dict.sample() for _ in range(int(N))]
+    print("Distribution of A: " + str(round(samples.count('A') * 1.0/N, 1)))
+    print("Distribution of B: " + str(round(samples.count('B') * 1.0/N, 1)))
+    print("Distribution of C: " + str(round(samples.count('C') * 1.0/N, 1)))
+    
+
+
+    
