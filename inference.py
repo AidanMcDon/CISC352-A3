@@ -301,8 +301,7 @@ class ExactInference(InferenceModule):
     def getBeliefDistribution(self):
         return self.beliefs
     
-
-if __name__ == '__main__':
+def testQ1():
     new_dict = {
         "A" : 10,
         "B" : 2,
@@ -319,6 +318,9 @@ if __name__ == '__main__':
     print("Distribution of A: " + str(round(samples.count('A') * 1.0/N, 1)))
     print("Distribution of B: " + str(round(samples.count('B') * 1.0/N, 1)))
     print("Distribution of C: " + str(round(samples.count('C') * 1.0/N, 1)))
+
+if __name__ == '__main__':
+    testQ1()
     
 
 

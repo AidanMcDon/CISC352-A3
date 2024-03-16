@@ -17,6 +17,7 @@ import util
 from util import raiseNotDefined
 import random
 import busters
+import distanceCalculator
 
 def normalize(self):
     """
@@ -89,7 +90,22 @@ def getObservationProb(self, noisyDistance, pacmanPosition, ghostPosition, jailP
     Return the probability P(noisyDistance | pacmanPosition, ghostPosition).
     """
     "*** YOUR CODE HERE ***"
-    raiseNotDefined()
+    noisy_none = False
+    jail_pos_ghost_pos = False
+    if noisyDistance == None:
+        noisy_none = True
+    if ghostPosition == jailPosition:
+        jail_pos_ghost_pos = True
+    
+    if(noisy_none and jail_pos_ghost_pos):
+        return 1.0
+    elif(noisy_none or jail_pos_ghost_pos):
+        return 0.0
+    
+    true_distance = distanceCalculator.manhattanDistance(pacmanPosition,ghostPosition)
+    return busters.getObservationProbability(noisyDistance, true_distance)
+
+
 
 
 
