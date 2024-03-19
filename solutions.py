@@ -125,7 +125,13 @@ def observeUpdate(self, observation, gameState):
     position is known.
     """
     "*** YOUR CODE HERE ***"
-    raiseNotDefined()
+    #iterate over all positions
+    for position in self.allPositions:
+        oberservation_pos = getObservationProb(self,observation,gameState.getPacmanPosition(),position,self.getJailPosition())
+
+        if oberservation_pos == 1: #if we get a one we know that means ghost is in jail position
+            self.beliefs[position] = 1 #update to one to avoid multiplication by 0 when the ghost is teleported to jail
+        self.beliefs[position] = self.beliefs[position] * oberservation_pos
     self.beliefs.normalize()
 
 
@@ -139,5 +145,16 @@ def elapseTime(self, gameState):
     current position is known.
     """
     "*** YOUR CODE HERE ***"
-    raiseNotDefined()
+    newBeliefs = self.beliefs.copy()  # Initialize an empty distribution for the new beliefs
+    for pos in self.allPositions:
+        newBeliefs[pos] = 0
 
+    for oldPos in self.allPositions:  # Iterate over all possible previous positions
+        newPosDist = self.getPositionDistribution(gameState, oldPos)  # Get the distribution over new positions from oldPos
+
+        for newPos, prob in newPosDist.items():  # For each new position and its probability
+            if newPos in self.allPositions:  # Make sure newPos is a valid position
+                newBeliefs[newPos] += self.beliefs[oldPos] * prob  # Update the newBeliefs distribution
+
+    newBeliefs.normalize()  # Normalize the new beliefs
+    self.beliefs = newBeliefs  # Update the agent's beliefs
